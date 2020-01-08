@@ -1,0 +1,35 @@
+kow@louie:~$ sudo minikube start --vm-driver=none
+* minikube v1.5.2 on Debian 9.11
+* Running on localhost (CPUs=4, Memory=15752MB, Disk=115150MB) ...
+* OS release is Debian GNU/Linux 9 (stretch)
+* Preparing Kubernetes v1.16.2 on Docker '17.12.1-ce' ...
+* Downloading kubelet v1.16.2
+* Downloading kubeadm v1.16.2
+* Pulling images ...
+* Launching Kubernetes ... 
+* Configuring local host environment ...
+* 
+! The 'none' driver provides limited isolation and may reduce system security and reliability.
+! For more information, see:
+  - https://minikube.sigs.k8s.io/docs/reference/drivers/none/
+* 
+! kubectl and minikube configuration will be stored in /root
+! To use kubectl or minikube commands as your own user, you may need to relocate them. For example, to overwrite your own settings, run:
+* 
+  - sudo mv /root/.kube /root/.minikube $HOME
+  - sudo chown -R $USER $HOME/.kube $HOME/.minikube
+* 
+* This can also be done automatically by setting the env var CHANGE_MINIKUBE_NONE_USER=true
+* Waiting for: apiserver
+* Done! kubectl is now configured to use "minikube"
+
+raspi
+sudo kubeadm init --pod-network-cidr 192.168.2.0/24 --apiserver-advertise-address 192.168.1.127 --apiserver-cert-extra-sans kubernetes.cluster.home
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 192.168.1.127:6443 --token booafy.n7eru5dyor9nnkxg --discovery-token-ca-cert-hash sha256:f86077553dc281e5eb2cccb3ceb8834677ef0402f78a0e410d776c97caa7d1af
