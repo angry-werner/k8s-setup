@@ -33,3 +33,42 @@ Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
 Then you can join any number of worker nodes by running the following on each as root:
 
 kubeadm join 192.168.1.127:6443 --token booafy.n7eru5dyor9nnkxg --discovery-token-ca-cert-hash sha256:f86077553dc281e5eb2cccb3ceb8834677ef0402f78a0e410d776c97caa7d1af
+
+Formattieren Windows
+DISKPART> list disk
+
+  Datenträger ###  Status         Größe    Frei     Dyn  GPT
+  ---------------  -------------  -------  -------  ---  ---
+  Datenträger 0    Online         1863 GB      0 B        *
+  Datenträger 1    Online          238 GB      0 B        *
+  Datenträger 2    Online          931 GB      0 B
+
+DISKPART> select disk 2
+
+Datenträger 2 ist jetzt der gewählte Datenträger.
+
+DISKPART> clean
+
+Der Datenträger wurde bereinigt.
+
+DISKPART> format quick
+
+  100 Prozent bearbeitet
+
+DiskPart hat das Volume erfolgreich formatiert.
+
+DISKPART> format
+
+  100 Prozent bearbeitet
+
+DiskPart hat das Volume erfolgreich formatiert.
+
+Formattieren Linux/Attach storage
+
+pi@raspberrypi:~ $ pi@raspberrypi:~ $ sudo lsblk
+NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+mmcblk0     179:0    0 29.7G  0 disk
+├─mmcblk0p1 179:1    0   63M  0 part /boot
+└─mmcblk0p2 179:2    0 29.7G  0 part /
+pi@raspberrypi:~ $
+
